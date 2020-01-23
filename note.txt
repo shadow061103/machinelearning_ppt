@@ -1,0 +1,55 @@
+Encoding Nonlinearity
+
+LinearProblem1.jpg
+線性model:藍點代表生病的樹，橘色點代表健康的樹
+雖然模型沒辦法很精準分辨(一兩個錯)，但還是好的模型
+
+LinearProblem2.jpg
+這是非線性分布
+任何線性模型都沒辦法預測正確
+畫出的任何一條線無法有效分類生病的樹和無生病的
+
+為了解決非線性分布的案例
+可以使用feature cross
+例如新增一個feature x3=x1x2
+y = b + w1x1+w2x2+w3x3
+
+可以用原來訓練模型的方法來訓練這個模型
+其他特徵組合的案例
+[A X B]: a feature cross formed by multiplying the values of two features.
+[A x B x C x D x E]: a feature cross formed by multiplying the values of five features.
+[A x A]: a feature cross formed by squaring a single feature.
+
+https://developers.google.com/machine-learning/glossary#synthetic_feature
+
+Crossing One-Hot Vectors
+想成是用邏輯運算子去合成的feature
+country:usa AND language:spanish
+
+binned_latitude = [0, 0, 0, 1, 0]
+binned_longitude = [0, 1, 0, 0, 0]
+>>binned_latitude X binned_longitude
+會得到25個結果
+
+
+binned_latitude(lat) = [
+  0  < lat <= 10
+  10 < lat <= 20
+  20 < lat <= 30
+]
+
+binned_longitude(lon) = [
+  0  < lon <= 15
+  15 < lon <= 30
+]
+組合起來會得到
+binned_latitude_X_longitude(lat, lon) = [
+  0  < lat <= 10 AND 0  < lon <= 15
+  0  < lat <= 10 AND 15 < lon <= 30
+  10 < lat <= 20 AND 0  < lon <= 15
+  10 < lat <= 20 AND 15 < lon <= 30
+  20 < lat <= 30 AND 0  < lon <= 15
+  20 < lat <= 30 AND 15 < lon <= 30
+]
+
+https://developers.google.com/machine-learning/glossary#one-hot_encoding
